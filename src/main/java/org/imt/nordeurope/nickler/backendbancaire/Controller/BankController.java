@@ -33,9 +33,9 @@ public class BankController {
         return new ResponseEntity<>(transactionRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/account/{Account_ID}/transactions"},produces = "application/json")
-    public ResponseEntity<List<Transaction>> getTransactionsFromAccount(@PathVariable String Account_ID) {
-        Account account= accountRepository.getById(Long.valueOf(Account_ID));
+    @GetMapping(value = {"/account/{Account_IBAN}/transactions"},produces = "application/json")
+    public ResponseEntity<List<Transaction>> getTransactionsFromAccount(@PathVariable String Account_IBAN) {
+        Account account= accountRepository.getByIBAN(Account_IBAN);
         return new ResponseEntity<>(transactionRepository.findTransactionsByCreditorOrDebtor(account,account), HttpStatus.OK);
     }
 

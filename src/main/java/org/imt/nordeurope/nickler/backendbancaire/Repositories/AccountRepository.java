@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account,Long> {
 
+    public Account getByIBAN(String IBAN);
+
 }
