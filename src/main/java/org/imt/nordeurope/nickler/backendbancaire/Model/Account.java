@@ -3,6 +3,7 @@ package org.imt.nordeurope.nickler.backendbancaire.Model;
 
 import org.imt.nordeurope.nickler.backendbancaire.Model.Enums.AccountType;
 import org.imt.nordeurope.nickler.backendbancaire.Model.Enums.Currency;
+import org.iban4j.*;
 
 import javax.persistence.*;
 
@@ -30,6 +31,9 @@ public class Account {
     @Column
     private Currency currency;
 
+    @Column
+    private String IBAN;
+
     public Long getId() {return id;}
 
     public void setId(Long id) {this.id = id;}
@@ -53,4 +57,11 @@ public class Account {
     public String getOwnerFirstName() {return ownerFirstName;}
 
     public void setOwnerFirstName(String ownerFirstName) {this.ownerFirstName = ownerFirstName;}
+
+    public void setIBAN (Iban iban){
+        this.IBAN = iban.toFormattedString();
+    }
+    public Iban getIban(){
+        return Iban.valueOf(IBAN);
+    }
 }

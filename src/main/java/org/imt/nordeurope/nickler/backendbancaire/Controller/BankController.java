@@ -25,7 +25,6 @@ public class BankController {
 
     @GetMapping(value = {"/account"},produces = "application/json")
     public ResponseEntity<List<Account>> getAllAccounts() {
-
         return new ResponseEntity<>(accountRepository.findAll(), HttpStatus.OK);
     }
 

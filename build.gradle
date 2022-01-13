@@ -26,6 +26,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
     runtimeOnly 'org.postgresql:postgresql'
+    implementation group: 'org.iban4j', name: 'iban4j', version: '3.2.3-RELEASE'
 }
 
 test {
