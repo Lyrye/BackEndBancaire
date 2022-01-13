@@ -3,7 +3,6 @@ package org.imt.nordeurope.nickler.backendbancaire.Model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Transaction {
@@ -13,10 +12,10 @@ public class Transaction {
 
 
     @ManyToOne
-    private Account Debtor;
+    private Account debtor;
 
     @ManyToOne
-    private Account Creditor;
+    private Account creditor;
 
     @Column
     private Double value;
@@ -29,13 +28,15 @@ public class Transaction {
 
     public void setId(Long id) {this.id = id;}
 
-    public Account getDebtor() {return Debtor;}
+    public Account getDebtor() {return debtor;}
 
-    public void setDebtor(Account debtor) {Debtor = debtor;}
+    public void setDebtor(Account debtor) {
+        this.debtor = debtor;}
 
-    public Account getCreditor() {return Creditor;}
+    public Account getCreditor() {return creditor;}
 
-    public void setCreditor(Account creditor) {Creditor = creditor;}
+    public void setCreditor(Account creditor) {
+        this.creditor = creditor;}
 
     public Double getValue() {return value;}
 
