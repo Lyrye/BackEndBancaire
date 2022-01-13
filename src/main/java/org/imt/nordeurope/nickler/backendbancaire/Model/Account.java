@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class Account {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
@@ -23,7 +23,7 @@ public class Account {
     private String accountName;
 
     @Column
-    private Double Balance;
+    private Double balance;
 
     @Column
     private AccountType accountType;
@@ -32,7 +32,9 @@ public class Account {
     private Currency currency;
 
     @Column
-    private String IBAN;
+    private String iban;
+
+    public Account(){}
 
     public Long getId() {return id;}
 
@@ -46,9 +48,10 @@ public class Account {
 
     public void setAccountName(String accountName) {this.accountName = accountName;}
 
-    public Double getBalance() {return Balance;}
+    public Double getBalance() {return balance;}
 
-    public void setBalance(Double balance) {Balance = balance;}
+    public void setBalance(Double balance) {
+        this.balance = balance;}
 
     public AccountType getAccountType() {return accountType;}
 
@@ -58,10 +61,10 @@ public class Account {
 
     public void setOwnerFirstName(String ownerFirstName) {this.ownerFirstName = ownerFirstName;}
 
-    public void setIBAN (Iban iban){
-        this.IBAN = iban.toFormattedString();
+    public void setIban(Iban iban){
+        this.iban = iban.toFormattedString();
     }
     public Iban getIban(){
-        return Iban.valueOf(IBAN);
+        return Iban.valueOf(iban);
     }
 }
