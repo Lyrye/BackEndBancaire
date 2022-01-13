@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 public class BankController {
 
+    //todo add service intermediare pour ne pas passer direct par les repository !
     @Autowired
     AccountRepository accountRepository;
 
