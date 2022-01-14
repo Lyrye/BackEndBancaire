@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @RestController
@@ -61,10 +62,18 @@ public class BankController {
         }
     }
 
+
     @DeleteMapping(value = {"/account/{Account_IBAN}"})
     public ResponseEntity<Void> deleteAccount(@PathVariable String Account_IBAN) {
+
         Account account= accountRepository.getByIban(Account_IBAN);
-        accountRepository.delete(account);
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<Transaction> list = transactionRepository.findTransactionsByCreditorOrDebtor(account,account);
+        for (Transaction transaction:list)
+        {
+            transactionRepository.delete(transaction);
+        }
+       accountRepository.delete(account);
+
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

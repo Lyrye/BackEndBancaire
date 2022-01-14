@@ -1,6 +1,5 @@
 package org.imt.nordeurope.nickler.backendbancaire.Model;
 
-
 import javax.persistence.*;
 import java.util.Date;
 
