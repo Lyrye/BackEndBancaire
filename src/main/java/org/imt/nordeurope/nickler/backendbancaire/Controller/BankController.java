@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -49,17 +48,23 @@ public class BankController {
     }
 
     @PostMapping(value = "/account",consumes ="application/json")
-    public ResponseEntity<String> createAccount(@RequestBody String accountInJson) {
+    public ResponseEntity<Void> createAccount(@RequestBody String accountInJson) {
         Gson gson = new Gson();
         Account account = new Account() ;
         account = gson.fromJson(accountInJson,Account.class) ;
         IBANValidation ibanValidation = ibanService.checkIBAN((account.getIban()).toString());
         if(ibanValidation.getValid()){
             accountRepository.save(account);
-            return new ResponseEntity<>("Ok", HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>("IBAN is not valid",HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
+    @DeleteMapping(value = {"/account/{Account_IBAN}"})
+    public ResponseEntity<Void> deleteAccount(@PathVariable String Account_IBAN) {
+        Account account= accountRepository.getByIban(Account_IBAN);
+        accountRepository.delete(account);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
