@@ -13,4 +13,5 @@ public interface IAccountService {
    public Account getByIban(String iban);
    public Boolean saveAccount(Account account);
    public void deleteAccount(Account account);
+   public Account getById(Long id);
 }

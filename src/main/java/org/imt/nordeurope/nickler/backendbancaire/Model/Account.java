@@ -79,4 +79,14 @@ public class Account {
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
+
+    public Account( String ownerLastName, String ownerFirstName, String accountName, Double balance, AccountType accountType, Currency currency, String iban) {
+        this.ownerLastName = ownerLastName;
+        this.ownerFirstName = ownerFirstName;
+        this.accountName = accountName;
+        this.balance = balance;
+        this.accountType = accountType;
+        this.currency = currency;
+        this.iban = iban;
+    }
 }

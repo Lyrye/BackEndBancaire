@@ -50,4 +50,9 @@ public class AccountService implements IAccountService{
         transactionService.deleteTransactions(transactionService.getTransactionsByCreditorOrDebtor(account));
         accountRepository.delete(account);
     }
+
+    @Override
+    public Account getById(Long id) {
+        return accountRepository.getById(id);
+    }
 }

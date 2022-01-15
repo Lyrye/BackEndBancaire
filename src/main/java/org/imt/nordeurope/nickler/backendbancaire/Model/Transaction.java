@@ -9,10 +9,10 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Account debtor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Account creditor;
 
     @Column
@@ -46,10 +46,16 @@ public class Transaction {
 
     public void setDate(Date date) {this.date = date;}
 
+    public Transaction( Account debtor, Account creditor, Double value, Date date) {
+        this.debtor = debtor;
+        this.creditor = creditor;
+        this.value = value;
+        this.date = date;
+    }
+
     //Currency of Transaction is always the same as Debtor
     public void doTransaction(){
-
         this.creditor.setBalance(this.creditor.getBalance()+value*(this.creditor.getCurrency().getCoefficient()));
-        this.debtor.setBalance(this.creditor.getBalance()-value);
+        this.debtor.setBalance(this.debtor.getBalance()-value);
     }
 }
