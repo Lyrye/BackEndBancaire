@@ -46,8 +46,10 @@ public class Transaction {
 
     public void setDate(Date date) {this.date = date;}
 
+    //Currency of Transaction is always the same as Debtor
     public void doTransaction(){
-        this.creditor.setBalance(this.creditor.getBalance()+value);
+
+        this.creditor.setBalance(this.creditor.getBalance()+value*(this.creditor.getCurrency().getCoefficient()));
         this.debtor.setBalance(this.creditor.getBalance()-value);
     }
 }
