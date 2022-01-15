@@ -31,7 +31,7 @@ public class Account {
     @Column
     private Currency currency;
 
-    @Column
+    @Column(unique = true)
     private String iban;
 
     public Account(){}
