@@ -14,4 +14,5 @@ public interface ITransactionService {
      void saveTransaction(Transaction transaction);
      void deleteTransaction(Transaction transaction);
      void deleteTransactions(List<Transaction> transactions);
+     void doTransaction(Transaction transaction);
 }

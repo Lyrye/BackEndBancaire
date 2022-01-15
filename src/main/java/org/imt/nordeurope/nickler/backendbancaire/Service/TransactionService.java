@@ -13,6 +13,8 @@ public class TransactionService implements ITransactionService{
 
     @Autowired
     TransactionRepository transactionRepository;
+    @Autowired
+    IIbanService ibanService;
 
     @Override
     public List<Transaction> getAllTransactions() {
@@ -37,5 +39,12 @@ public class TransactionService implements ITransactionService{
     @Override
     public void deleteTransactions(List<Transaction> transactions) {
         transactionRepository.deleteAll(transactions);
+    }
+
+    @Override
+    public void doTransaction(Transaction transaction) {
+        if( (ibanService.checkIBAN(transaction.getCreditor().getIban())).getValid() && (ibanService.checkIBAN(transaction.getDebtor().getIban())).getValid()){
+            transaction.doTransaction();
+        }
     }
 }

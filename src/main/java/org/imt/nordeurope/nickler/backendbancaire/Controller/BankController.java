@@ -48,9 +48,8 @@ public class BankController {
         Gson gson = new Gson();
         Account account = new Account() ;
         account = gson.fromJson(accountInJson,Account.class) ;
-        IBANValidation ibanValidation = ibanService.checkIBAN((account.getIban()));
-        if(ibanValidation.getValid()){
-            accountService.saveAccount(account);
+
+        if (accountService.saveAccount(account)){
             return new ResponseEntity<>(HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

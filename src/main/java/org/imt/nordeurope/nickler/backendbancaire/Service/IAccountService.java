@@ -11,6 +11,6 @@ public interface IAccountService {
 
    public List<Account> getAll();
    public Account getByIban(String iban);
-   public void saveAccount(Account account);
+   public Boolean saveAccount(Account account);
    public void deleteAccount(Account account);
 }

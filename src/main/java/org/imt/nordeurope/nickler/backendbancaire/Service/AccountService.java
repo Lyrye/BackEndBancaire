@@ -17,6 +17,9 @@ public class AccountService implements IAccountService{
     @Autowired
     ITransactionService transactionService;
 
+    @Autowired
+    IIbanService ibanService;
+
 
     @Override
     public List<Account> getAll() {
@@ -29,8 +32,17 @@ public class AccountService implements IAccountService{
     }
 
     @Override
-    public void saveAccount(Account account) {
-        accountRepository.save(account);
+    public Boolean saveAccount(Account account) {
+        boolean iscreated = false;
+        if((ibanService.checkIBAN(account.getIban()).getValid())){
+            try {
+                accountRepository.save(account);
+            } catch (Throwable t){
+                t.printStackTrace();
+            }
+            iscreated= true;
+        }
+        return iscreated;
     }
 
     @Override
