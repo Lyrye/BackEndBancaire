@@ -4,19 +4,15 @@ import com.google.gson.Gson;
 import org.imt.nordeurope.nickler.backendbancaire.Model.Account;
 import org.imt.nordeurope.nickler.backendbancaire.Model.IBANValidation;
 import org.imt.nordeurope.nickler.backendbancaire.Model.Transaction;
-import org.imt.nordeurope.nickler.backendbancaire.Model.TransactionList;
 import org.imt.nordeurope.nickler.backendbancaire.Repositories.AccountRepository;
 import org.imt.nordeurope.nickler.backendbancaire.Repositories.TransactionRepository;
 import org.imt.nordeurope.nickler.backendbancaire.Service.IIbanService;
-import org.imt.nordeurope.nickler.backendbancaire.Service.IbanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import java.util.List;
 
 @RestController
@@ -39,10 +35,8 @@ public class BankController {
     }
 
     @GetMapping(value = {"/transactions"},produces = "application/json")
-    public ResponseEntity<TransactionList> getAllTransactions() {
-        TransactionList transactionList = new TransactionList();
-        transactionList.setTransactionList(transactionRepository.findAll());
-        return new ResponseEntity<>(transactionList, HttpStatus.OK);
+    public ResponseEntity<List<Transaction>> getAllTransactions() {
+        return new ResponseEntity<>(transactionRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/account/{Account_IBAN}/transactions"},produces = "application/json")
@@ -56,7 +50,7 @@ public class BankController {
         Gson gson = new Gson();
         Account account = new Account() ;
         account = gson.fromJson(accountInJson,Account.class) ;
-        IBANValidation ibanValidation = ibanService.checkIBAN((account.getIban()).toString());
+        IBANValidation ibanValidation = ibanService.checkIBAN((account.getIban()));
         if(ibanValidation.getValid()){
             accountRepository.save(account);
             return new ResponseEntity<>(HttpStatus.CREATED);
