@@ -64,7 +64,12 @@ public class Account {
     public void setIban(Iban iban){
         this.iban = iban.toFormattedString();
     }
-    public Iban getIban(){
+
+   public Iban IbanObject(){
         return Iban.valueOf(iban);
     }
+    public String getIban(){
+        return iban;
+    }
+
 }
