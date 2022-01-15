@@ -21,8 +21,8 @@ public class Transaction {
     @Column
     private Date date;
 
+
     public Transaction() {
-        doTransaction();
     }
     public Long getId() {return id;}
 
