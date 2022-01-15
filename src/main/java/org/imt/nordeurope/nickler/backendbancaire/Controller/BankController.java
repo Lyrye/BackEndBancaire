@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.imt.nordeurope.nickler.backendbancaire.Model.Account;
 import org.imt.nordeurope.nickler.backendbancaire.Model.IBANValidation;
 import org.imt.nordeurope.nickler.backendbancaire.Model.Transaction;
+import org.imt.nordeurope.nickler.backendbancaire.Model.TransactionList;
 import org.imt.nordeurope.nickler.backendbancaire.Repositories.AccountRepository;
 import org.imt.nordeurope.nickler.backendbancaire.Repositories.TransactionRepository;
 import org.imt.nordeurope.nickler.backendbancaire.Service.IIbanService;
@@ -37,8 +38,10 @@ public class BankController {
     }
 
     @GetMapping(value = {"/transactions"},produces = "application/json")
-    public ResponseEntity<List<Transaction>> getAllTransactions() {
-        return new ResponseEntity<>(transactionRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<TransactionList> getAllTransactions() {
+        TransactionList transactionList = new TransactionList();
+        transactionList.setTransactionList(transactionRepository.findAll());
+        return new ResponseEntity<>(transactionList, HttpStatus.OK);
     }
 
     @GetMapping(value = {"/account/{Account_IBAN}/transactions"},produces = "application/json")
