@@ -69,7 +69,14 @@ public class Account {
         return Iban.valueOf(iban);
     }
     public String getIban(){
-        return iban;
+        return this.iban;
     }
 
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
 }
