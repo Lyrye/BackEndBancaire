@@ -21,7 +21,9 @@ public class Transaction {
     @Column
     private Date date;
 
-
+    public Transaction() {
+        doTransaction();
+    }
     public Long getId() {return id;}
 
     public void setId(Long id) {this.id = id;}
@@ -43,4 +45,9 @@ public class Transaction {
     public Date getDate() {return date;}
 
     public void setDate(Date date) {this.date = date;}
+
+    public void doTransaction(){
+        this.creditor.setBalance(this.creditor.getBalance()+value);
+        this.debtor.setBalance(this.creditor.getBalance()-value);
+    }
 }
