@@ -42,5 +42,4 @@ public class TransactionService implements ITransactionService{
     public void deleteTransactions(List<Transaction> transactions) {
         transactionRepository.deleteAll(transactions);
     }
-
 }
