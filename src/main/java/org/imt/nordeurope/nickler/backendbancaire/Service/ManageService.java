@@ -20,8 +20,6 @@ public class ManageService implements IManageService{
     public void doTransaction(Transaction transaction) {
         if( (ibanService.checkIBAN(transaction.getCreditor().getIban())).getValid() && (ibanService.checkIBAN(transaction.getDebtor().getIban())).getValid()){
             //mis a jour des comptes contenu dans la transaction pour obtenir la bonne valeur de balance
-            transaction.setCreditor(accountService.getByIban(transaction.getCreditor().getIban()));
-            transaction.setDebtor(accountService.getByIban(transaction.getDebtor().getIban()));
             transaction.doTransaction();
             accountService.saveAccount(transaction.getDebtor());
             accountService.saveAccount(transaction.getCreditor());
