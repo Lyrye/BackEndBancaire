@@ -32,6 +32,11 @@ public class BankController {
         return new ResponseEntity<>(accountService.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = {"/account/{Account_IBAN}"},produces = "application/json")
+    public ResponseEntity<Account> getAccount(@PathVariable String Account_IBAN) {
+        return new ResponseEntity<>(accountService.getByIban(Account_IBAN), HttpStatus.OK);
+    }
+
     @GetMapping(value = {"/transactions"},produces = "application/json")
     public ResponseEntity<List<Transaction>> getAllTransactions() {
         return new ResponseEntity<>(transactionService.getAllTransactions(), HttpStatus.OK);
